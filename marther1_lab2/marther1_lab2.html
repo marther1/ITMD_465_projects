@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Modify Title between these comments (Choose correct class number and substitute your username) -->
+	<title>ITMD 465/565 Lab 2 - marther1 - DOM Manipulation</title>
+	<!-- Modify Title between these comments -->
+	<style type="text/css">
+		body {
+			background-color: #ccc;
+			font-family: sans-serif;
+		}
+		label {
+			width: 100px;
+			display: inline-block;
+			margin: 5px 0;
+		}
+		input {
+			display: inline-block;
+			margin: 5px 0;
+		}
+		button {
+			display: inline-block;
+			margin: 20px 10px 20px 0;
+		}
+		#wrapper {
+			background-color: #fff;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px 40px;
+		}
+		#resultsWrapper .result {
+			border: 4px solid red;
+			padding: 10px;
+			margin: 10px 0;
+		}
+		#resultsWrapper .red {
+			border-color: red;
+		}
+		#resultsWrapper .red h2 {
+			color: red;
+		}
+		#resultsWrapper .green {
+			border-color: green;
+		}
+		#resultsWrapper .green h2 {
+			color: green;
+		}
+		#resultsWrapper .blue {
+			border-color: blue;
+		}
+		#resultsWrapper .blue h2 {
+			color: blue;
+		}
+		/* You may add additional CSS below this comment if you feel necessary */
+		div #resultsWrapper h2 {
+			border-style: solid;
+			border-color: inherit;
+			padding: 10px;
+		}
+		div #resultsWrapper p {
+			font-style: initial;
+			font-size: initial;
+			color: initial;
+			font-weight: initial;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<!-- Modify headlines between these comments (Choose correct class number and substitute Name and Email) -->
+		<h1>ITMD 465/565 - Lab 2 - DOM Manipulation</h1>
+		<h2>Mohmedamir Arther - marther@hawk.iit.edu</h2>
+		<!-- Modify headlines between these comments -->
+		<label for="bodyInput">Body Text: </label><input id="bodyInput" type="text"><br>
+		<label for="qtyInput">Quantity: </label><input id="qtyInput" type="text"><br>
+		<label for="colorInput">Color: </label>
+		<select id="colorInput">
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="blue">Blue</option>
+		</select><br>
+
+		<button id="runBtn">Run Lab</button>
+		<button id="resetBtn">Reset Lab</button>
+
+		<h2>Results</h2>
+		<div id="resultsWrapper"></div>
+	</div>
+
+	<script type="text/javascript">
+		// Begin JavaScript Code Here - Do not put JavaScript outside these comments.
+document.getElementById('runBtn').addEventListener('click', run, false);
+function run() {
+	var body = document.getElementById('bodyInput').value;
+	var qty = document.getElementById('qtyInput').value;
+	var clr = document.getElementById('colorInput').value;
+	if (qty === ''){
+		alert('Please enter the number of Quantity you would like to output.');
+	}
+	else if (isNaN(qty)){
+		alert('Invalid. Quantity value must be a number');
+	}
+	else if (Number(qty) <= 0) {
+		alert('Quantity number should be positive');
+	}
+	else if (body === ''){
+		alert('Your body text input is empty');
+	}
+	else {
+		document.getElementById('resultsWrapper').innerHTML = '';
+		for(var num = 0; num < Number(qty); ++num) {
+			var h = document.createElement("H2");
+			var t = document.createTextNode("Output " + (num + 1));
+			h.appendChild(t);
+			document.getElementById('resultsWrapper').style.color = clr;
+			document.getElementById("resultsWrapper").appendChild(h);
+			var p = document.createElement("P");
+			var b = document.createTextNode(body);
+			p.appendChild(b);
+			document.getElementById("resultsWrapper").appendChild(p);
+			h.appendChild(p);
+			}
+		document.getElementById('bodyInput').value = '';
+		document.getElementById('qtyInput').value = '';
+		}
+	}
+
+		// End JavaScript Code Here - Do not put JavaScript outside these comments.
+	</script>
+</body>
+</html>

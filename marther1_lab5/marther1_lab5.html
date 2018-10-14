@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ITMD-4/565 Lab 4 - Canvas Drawing</title>
+	<style type="text/css">
+		#content-wrapper {
+			width: 600px;
+			margin: 0 auto;
+			text-align: center;
+		}
+		#canvasRun {
+			background-color: #c00;
+			border: 0;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="content-wrapper">
+		<button id="canvasRun">Draw Canvas</button><br><br>
+		<canvas id="myCanvas" width="600" height="450"></canvas>
+	</div>
+	<script type="text/javascript">
+		// Canvas Drawing Code Here
+		document.getElementById('canvasRun').addEventListener('click', run, false);
+		function run (){
+		var stage = document.createElement("canvas");
+		document.body.appendChild(stage);
+
+		var c=document.getElementById("myCanvas");
+		var ctx=c.getContext("2d");
+
+		//gradient
+		var my_gradient=ctx.createLinearGradient(0,0,0,425);
+		my_gradient.addColorStop(0,"white");
+		my_gradient.addColorStop(1,"black");
+		ctx.fillStyle=my_gradient;
+		ctx.fillRect(0,0,600,450);
+
+		//title
+		ctx.font = "32px sans-serif";
+		ctx.fillStyle = "#C80000";
+		ctx.textAlign = "center";
+		ctx.fillText("ITMD 465 Canvas Lab",300,50);
+
+		//underline
+		ctx.fillStyle = "#C80000";
+		ctx.fillRect(20, 60, 560, 4);
+
+		//rectangle
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = 10;
+		ctx.strokeRect(450, 100, 120, 120);
+		ctx.fillStyle = "#C80000";
+		ctx.fillRect(450, 100, 120, 120);
+
+		//circle
+		ctx.beginPath();
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = 6;
+		ctx.arc(110,170,65,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle = "#0000C8";
+		ctx.arc(110,170,65,0,2*Math.PI);
+		ctx.fill();
+
+		//arc
+		ctx.beginPath();
+		ctx.arc(290,160,60,((Math.PI/180)*(-100)),(Math.PI/180)*50);
+		ctx.lineWidth = 20;
+		ctx.strokeStyle = '#FFA500';
+		ctx.stroke();
+
+		//triangle
+		ctx.beginPath();
+		ctx.fillStyle = "#00C800";
+    ctx.moveTo(40, 370);
+    ctx.lineTo(100, 270);
+    ctx.lineTo(160, 370);
+    ctx.fill();
+
+		ctx.beginPath();
+		ctx.fillStyle = 'white';
+		ctx.fillRect(250, 265, 330, 100);
+
+		ctx.beginPath();
+		ctx.moveTo(280,320);
+		ctx.bezierCurveTo(430,220,385,410,550,310)
+		ctx.lineWidth = 2;
+		ctx.setLineDash([10]);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+
+		//name and email
+		ctx.font = "14px sans-serif";
+		ctx.fillStyle = "white";
+		ctx.textAlign= "left";
+		ctx.fillText("Mohmedamir Arther",30,410);
+		ctx.fillText("marther@hawk.iit.edu",30,430);
+
+		//image
+		var img=document.createElement('img');
+		img.src="IIT_SAT_stack_186_white.png";
+		img.onload = function () {
+		ctx.drawImage(img, 330,375, 250,55);
+		}
+	}
+	</script>
+</body>
+</html>

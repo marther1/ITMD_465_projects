@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Modify Title between these comments (Choose correct class number and substitute your username) -->
+	<title>ITMD 465 Lab 3</title>
+	<!-- Modify Title between these comments -->
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+		#main-container {
+			width: 100%;
+			background-color: white;
+			text-align: center;
+		}
+		tr:nth-child(even) {background-color: #f2f2f2;}
+    table {
+			border-collapse: collapse;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		table, td {
+			border: 1px solid black;
+			padding: 0.4rem;
+		}
+		td {
+			border: 1px solid black;
+		}
+		tr, td {
+			width: 17%;
+		}
+		#button-wrapper	{
+		padding: 1.125em;
+		}
+		#loadbtn {
+		margin-right: 10%;
+		}
+		#header {
+			background-color: #D3D3D3;
+		}
+	</style>
+</head>
+<body>
+	<div id="main-container">
+		<!-- Modify headlines between these comments (Choose correct class number and substitute Name and Email) -->
+		<h1>ITMD 465 - Lab 3</h1>
+		<h2>Mohmedamir Arther - marther@hawk.iit.edu</h2>
+		<!-- Modify headlines between these comments -->
+			<div id="button-wrapper">
+				<button id="loadbtn">Load Data</button>
+				<button id="resetbtn">Reset</button>
+			</div>
+
+			<h3>Employee List</h3>
+			<div class="row1">
+			<table>
+			<tr id=header>
+			<td id="id">ID</td>
+			<td id="fname">First Name</td>
+			<td id="lname">Last Name</td>
+			<td id="title">Title</td>
+			<td id="email">Email</td>
+			<td id="gender">Gender</td>
+			<td id="active">Active</td>
+			</tr>
+			</table>
+			</div>
+			<div id="resultsWrapper"></div>
+	</div>
+
+<script type="text/javascript">
+		// Begin all JavaScript Code Here - Do not put JavaScript outside these comments.
+document.getElementById('resetbtn').disabled = true;
+document.getElementById('loadbtn').addEventListener('click', function(){
+  var myRequest = new XMLHttpRequest();
+  // document.getElementById('resultsWrapper').innerhtml = '';
+  myRequest.onreadystatechange = function(){
+    if (myRequest.readyState === 4) {
+      if (myRequest.status === 200) {
+        var a = JSON.parse(myRequest.responseText);
+        var table = document.createElement('table');
+        for(var i = 0; i <a.length; i++) {
+          var row = document.createElement('tr');
+          var id = document.createElement('td');
+          var idtext = document.createTextNode(a[i].id);
+					id.appendChild(idtext);
+          row.appendChild(id);
+          var fname = document.createElement('td');
+          var ftext = document.createTextNode(a[i].first_name);
+          fname.appendChild(ftext);
+          row.appendChild(fname);
+          var lname = document.createElement('td');
+          var ltext = document.createTextNode(a[i].last_name);
+          lname.appendChild(ltext);
+          row.appendChild(lname);
+          var title = document.createElement('td');
+          var titletext = document.createTextNode(a[i].title);
+          title.appendChild(titletext);
+          row.appendChild(title);
+          var email = document.createElement('td');
+          var emailtext = document.createTextNode(a[i].email);
+          email.appendChild(emailtext);
+          row.appendChild(email);
+          var gender = document.createElement('td');
+          var gendertext = document.createTextNode(a[i].gender);
+          gender.appendChild(gendertext);
+          row.appendChild(gender);
+          var active = document.createElement('td');
+          var activetext = document.createTextNode(a[i].active);
+          active.appendChild(activetext);
+          row.appendChild(active);
+          table.appendChild(row);
+
+        }
+      document.getElementById('resultsWrapper').appendChild(table);
+			//document.getElementById('resultsWrapper').style.color = 'red';
+    }
+  }
+};
+myRequest.open('GET', 'http://libertyville.rice.iit.edu/scripts/4565_lab3.php', true);
+myRequest.send();
+document.getElementById('loadbtn').disabled = true;
+document.getElementById('resetbtn').disabled = false;
+
+  }, false);
+document.getElementById('resetbtn').addEventListener('click', reset, false);
+function reset() {
+	document.getElementById('resultsWrapper').innerHTML = '';
+	document.getElementById('loadbtn').disabled = false;
+	document.getElementById('resetbtn').disabled = true;
+}
+
+		// End all JavaScript Code Here - Do not put JavaScript outside these comments.
+	</script>
+</body>
+</html>
